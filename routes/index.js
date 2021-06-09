@@ -1,5 +1,6 @@
 const express = require("express");
-const passport = require("passport");
+const authRouter = require("./auth");
+const dashboardRouter = require("./dashboard");
 
 const router = express.Router();
 
@@ -9,42 +10,8 @@ router.get("/", (req, res) => {
     message: "/",
   });
 });
-/* GET dashboard page. */
-router.get("/dashboard", (req, res) => {
-  res.send({
-    message: "/dashboard",
-  });
-});
 
-/**
- * On authentication error route.
- */
-router.get("/auth/error", (req, res) => res.send("Unknown Error"));
-/**
- * Github authentication route.
- */
-router.get(
-  "/auth/github",
-  passport.authenticate("github", { scope: ["user:email"] })
-);
-/**
- * On authentication success route.
- */
-router.get(
-  "/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/auth/error" }),
-  (req, res) => {
-    res.redirect("/dashboard");
-  }
-);
-
-/**
- * Logout user.
- */
-router.get("/logout", (req, res) => {
-  req.session = null;
-  req.logout();
-  res.redirect("/");
-});
+router.use("/auth", authRouter);
+router.use("/dashboard", dashboardRouter);
 
 module.exports = router;
