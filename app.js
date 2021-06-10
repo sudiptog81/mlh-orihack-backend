@@ -13,6 +13,7 @@ const { MONGODB_URL, SESSION_SECRET } = require("./util/secrets");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
 
 const app = express();
 
@@ -56,5 +57,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/post", postRouter);
 
 module.exports = app;
