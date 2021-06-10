@@ -7,4 +7,5 @@ router.get("/", getAll);
 router.post("/", add);
 router.get("/:id", findById);
 router.delete("/:postId", deletePost);
+
 module.exports = router;
