@@ -13,4 +13,9 @@ router.get("/", (req, res) => {
 router.use("/auth", authRouter);
 router.use("/dashboard", dashboardRouter);
 
+/* Catch all endpoint. */
+router.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
 module.exports = router;
