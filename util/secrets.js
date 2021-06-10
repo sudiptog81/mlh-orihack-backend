@@ -1,0 +1,15 @@
+require("dotenv").config();
+
+const {
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
+  GITHUB_CALLBACK_URL,
+  SESSION_SECRET,
+} = process.env;
+
+module.exports = {
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
+  GITHUB_CALLBACK_URL,
+  SESSION_SECRET,
+};
