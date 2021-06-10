@@ -10,14 +10,18 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "connect-mongo": "^4.4.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
+    "dotenv-defaults": "^2.0.2",
     "express": "^4.16.4",
     "express-session": "^1.17.2",
+    "mongoose": "^5.12.13",
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
-    "passport-github2": "^0.1.12"
+    "passport-github2": "^0.1.12",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.28.0",
