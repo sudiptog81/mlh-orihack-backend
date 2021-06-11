@@ -1,0 +1,35 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "und3fined-v01d",
+      "name": "Soham Parekh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55358652?v=4",
+      "profile": "https://sohamp.dev",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
+      "login": "desirekaleba",
+      "name": "Desire Kaleba",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46345872?v=4",
+      "profile": "https://github.com/desirekaleba",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "mlh-orihack-backend",
+  "projectOwner": "sudiptog81",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
