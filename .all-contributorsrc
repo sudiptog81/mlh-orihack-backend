@@ -14,6 +14,16 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "desirekaleba",
+      "name": "Desire Kaleba",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46345872?v=4",
+      "profile": "https://github.com/desirekaleba",
+      "contributions": [
+        "code",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
