@@ -19,6 +19,38 @@ async function getAll(req, res) {
   }
 }
 
+async function add(req, res) {
+  const { userId, title, body } = req.body;
+
+  let post = new Post({
+    user: userId,
+    title,
+    body,
+  });
+
+  try {
+    post = await post.save();
+
+    if (!post) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Operation failed",
+      });
+    }
+    return res.status(200).json({
+      status: "success",
+      body: post,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: "failed",
+      message: "An error occured",
+      error: err,
+    });
+  }
+}
+
 module.exports = {
   getAll,
+  add,
 };
