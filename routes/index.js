@@ -1,17 +1,23 @@
-const createError = require("http-errors");
 const express = require("express");
+const path = require("path");
+
+const authRouter = require("./auth");
+const commentRouter = require("./comment");
+const likeRouter = require("./like");
+const meRouter = require("./me");
+
+const isAuthenticated = require("../middleware/auth");
 
 const router = express.Router();
 
-/* GET home page. */
-router.get("/", (req, res, next) => {
-  if (!req.user) {
-    next(createError(401, "Unauthorized"));
-  }
+router.use("/auth", authRouter);
+router.use("/comment", isAuthenticated, commentRouter);
+router.use("/like", isAuthenticated, likeRouter);
+router.use("/me", isAuthenticated, meRouter);
 
-  res.send({
-    message: "/",
-  });
+/* Catch all endpoint. */
+router.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
 module.exports = router;
