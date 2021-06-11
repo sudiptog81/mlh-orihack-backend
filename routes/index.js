@@ -12,7 +12,7 @@ const isAuthenticated = require("../middleware/auth");
 const router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/post", postRouter);
+router.use("/post", isAuthenticated, postRouter);
 router.use("/comment", isAuthenticated, commentRouter);
 router.use("/like", isAuthenticated, likeRouter);
 router.use("/me", isAuthenticated, meRouter);
