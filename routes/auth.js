@@ -21,7 +21,11 @@ router.get(
   "/github/callback",
   passport.authenticate("github", { failureRedirect: "/error" }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect(
+      `${
+        process.env.NODE_ENV === "development" ? "http://localhost:8080" : ""
+      }/?success=true`
+    );
   }
 );
 
@@ -38,7 +42,11 @@ router.get("/error", (req, res, next) => {
  */
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/");
+    res.redirect(
+      `${
+        process.env.NODE_ENV === "development" ? "http://localhost:8080" : ""
+      }/`
+    );
   });
 });
 
