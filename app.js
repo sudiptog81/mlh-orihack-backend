@@ -11,8 +11,7 @@ const initPassport = require("./util/passport");
 const logger = require("./util/logger");
 const { MONGODB_URL, SESSION_SECRET } = require("./util/secrets");
 
-const indexRouter = require("./routes/index");
-const authRouter = require("./routes/auth");
+const routes = require("./routes");
 
 const app = express();
 
@@ -53,9 +52,8 @@ app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-app.use("*", indexRouter);
+app.use(routes);
 
 module.exports = app;
