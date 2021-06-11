@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema(
     avatar: String,
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
 

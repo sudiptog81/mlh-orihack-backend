@@ -1,14 +1,19 @@
 const Like = require("../models/like");
+const Post = require("../models/post");
 const logger = require("../util/logger");
 
 const createLike = async (req, res) => {
   try {
     const { post } = req.body;
 
-    const like = Like.create({
+    const like = await Like.create({
       post,
       user: req.user.id,
     });
+
+    const postDoc = await Post.findById(post);
+    postDoc.likes.push(like);
+    await postDoc.save();
 
     res.status(201).send({
       message: "Post liked successfully",

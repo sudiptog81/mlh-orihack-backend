@@ -4,9 +4,13 @@ const logger = require("../util/logger");
 const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
-      .populate("user", "username")
-      .populate("comment")
-      .populate("like");
+      .populate({
+        path: "user comments likes",
+        populate: {
+          path: "user",
+        },
+      })
+      .sort({ createdAt: -1 });
 
     res.status(201).send({
       message: `Found ${posts.length} post(s).`,

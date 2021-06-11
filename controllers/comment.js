@@ -1,15 +1,20 @@
 const Comment = require("../models/comment");
+const Post = require("../models/post");
 const logger = require("../util/logger");
 
 const createComment = async (req, res) => {
   try {
     const { post, body } = req.body;
 
-    const comment = Comment.create({
+    const comment = await Comment.create({
       post,
       body,
       user: req.user.id,
     });
+
+    const postDoc = await Post.findById(post);
+    postDoc.comments.push(comment);
+    await postDoc.save();
 
     res.status(201).send({
       message: "Comment created successfully",
