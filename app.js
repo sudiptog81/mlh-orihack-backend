@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
@@ -13,6 +14,8 @@ const { MONGODB_URL, SESSION_SECRET } = require("./util/secrets");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const commentRouter = require("./routes/comment");
+const isAuthenticated = require("./middleware/auth");
 
 const app = express();
 
@@ -56,5 +59,25 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/comment", commentRouter);
+app.use(isAuthenticated);
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+// 404 error handler
+app.use((error, req, res) => {
+  // set locals, only providing error in development
+  res.locals.message = error.message;
+  res.locals.error = req.app.get("env") === "development" ? error : {};
+
+  // render 404 page
+  res.status(error.status || 500);
+  res.send({
+    error: error.message,
+  });
+});
 
 module.exports = app;

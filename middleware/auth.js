@@ -1,14 +1,14 @@
+const createError = require("http-errors");
+
 /**
  * Check user logged in status.
  */
-const isLoggedIn = (req, res, next) => {
+const isAuthenticated = (req, res, next) => {
   if (req.user) {
     next();
   } else {
-    res.status(401).send({
-      message: "Not Logged In",
-    });
+    next(createError(401, "Unauthenticated"));
   }
 };
 
-module.exports = isLoggedIn;
+module.exports = isAuthenticated;

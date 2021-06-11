@@ -17,6 +17,7 @@
     "dotenv-defaults": "^2.0.2",
     "express": "^4.16.4",
     "express-session": "^1.17.2",
+    "http-errors": "^1.8.0",
     "mongoose": "^5.12.13",
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
