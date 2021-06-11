@@ -74,8 +74,36 @@ async function findById(req, res) {
   }
 }
 
+async function deletePost(req, res) {
+  const { postId } = req.params;
+
+  await Post.findByIdAndRemove(postId)
+    .then((deletedPost) => {
+      if (deletedPost) {
+        return res.status(200).json({
+          status: "success",
+          body: {
+            message: "Post deleted",
+          },
+        });
+      }
+      return res.status(404).json({
+        status: "failed",
+        message: "Post not found",
+      });
+    })
+    .catch((err) =>
+      res.status(400).json({
+        status: "failed",
+        message: "An error occured",
+        error: err,
+      })
+    );
+}
+
 module.exports = {
   getAll,
   add,
   findById,
+  deletePost,
 };
