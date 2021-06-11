@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema(
         ref: "Post",
       },
     ],
+    avatar: String,
   },
   {
     timestamp: true,

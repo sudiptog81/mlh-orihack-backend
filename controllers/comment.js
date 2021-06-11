@@ -16,7 +16,7 @@ const createComment = async (req, res) => {
       body: comment,
     });
   } catch (err) {
-    logger.error("Error creating comment", { err });
+    logger.error("POST /comment/create", { err });
     res.status(500).send({
       error: err.message,
     });
@@ -33,7 +33,7 @@ const deleteComment = async (req, res) => {
       message: "Comment deleted successfully",
     });
   } catch (err) {
-    logger.error("Error deleting comment", { err });
+    logger.error("DELETE /comment/delete", { err });
     res.status(500).send({
       error: err.message,
     });

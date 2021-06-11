@@ -1,5 +1,8 @@
+const createError = require("http-errors");
 const express = require("express");
 const passport = require("passport");
+
+const logger = require("../util/logger");
 
 const router = express.Router();
 
@@ -25,7 +28,10 @@ router.get(
 /**
  * On authentication error route.
  */
-router.get("/error", (req, res) => res.send("Unknown Error"));
+router.get("/error", (req, res, next) => {
+  logger.error("Failed to authenticate user");
+  next(createError(401, "Failed to authenticate"));
+});
 
 /**
  * Logout user.

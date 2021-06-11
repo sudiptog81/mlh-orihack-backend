@@ -15,6 +15,8 @@ const { MONGODB_URL, SESSION_SECRET } = require("./util/secrets");
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const commentRouter = require("./routes/comment");
+const likeRouter = require("./routes/like");
+const meRouter = require("./routes/me");
 const isAuthenticated = require("./middleware/auth");
 
 const app = express();
@@ -26,7 +28,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
   },
   (err) => {
     if (err) {
@@ -59,8 +61,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
-app.use("/comment", commentRouter);
 app.use(isAuthenticated);
+app.use("/me", meRouter);
+app.use("/comment", commentRouter);
+app.use("/like", likeRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
