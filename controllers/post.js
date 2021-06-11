@@ -50,7 +50,32 @@ async function add(req, res) {
   }
 }
 
+async function findById(req, res) {
+  const { postId } = req.params;
+  try {
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        status: "failed",
+        message: "Post not found",
+      });
+    }
+    return res.status(200).json({
+      status: "success",
+      body: post,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: "failed",
+      message: "An error occured",
+      error: err,
+    });
+  }
+}
+
 module.exports = {
   getAll,
   add,
+  findById,
 };
