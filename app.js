@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
@@ -22,7 +23,7 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
   },
   (err) => {
     if (err) {
@@ -55,5 +56,23 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.use(routes);
+
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  next(createError(404));
+});
+
+// 404 error handler
+app.use((error, req, res) => {
+  // set locals, only providing error in development
+  res.locals.message = error.message;
+  res.locals.error = req.app.get("env") === "development" ? error : {};
+
+  // render 404 page
+  res.status(error.status || 500);
+  res.send({
+    error: error.message,
+  });
+});
 
 module.exports = app;
