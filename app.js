@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
+const cors = require("cors");
 
 const initPassport = require("./util/passport");
 const logger = require("./util/logger");
@@ -55,6 +56,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
+app.use(cors());
 app.use(routes);
 
 // catch 404 and forward to error handler
