@@ -24,6 +24,17 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "aayush-05",
+      "name": "Aayush Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47032027?v=4",
+      "profile": "http://linkedin.com/in/aayush-gupta-447978164/",
+      "contributions": [
+        "test",
+        "doc",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
