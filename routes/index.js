@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const authRouter = require("./auth");
+const postRouter = require("./post");
 const commentRouter = require("./comment");
 const likeRouter = require("./like");
 const meRouter = require("./me");
@@ -11,6 +12,7 @@ const isAuthenticated = require("../middleware/auth");
 const router = express.Router();
 
 router.use("/auth", authRouter);
+router.use("/post", postRouter);
 router.use("/comment", isAuthenticated, commentRouter);
 router.use("/like", isAuthenticated, likeRouter);
 router.use("/me", isAuthenticated, meRouter);
