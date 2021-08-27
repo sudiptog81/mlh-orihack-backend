@@ -83,9 +83,32 @@ const deletePost = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    const { id, title, body } = req.body;
+    const post = await Post.findById({ _id: id })
+    await Post.updateOne({ _id: id },
+      {
+        title: title || post.title,
+        body: body || post.body
+      });
+
+    res.status(201).send({
+      message: "Post updated successfully"
+      // check if update needs a response
+    });
+  } catch (err) {
+    logger.error("POST /post/update", { err });
+    res.status(500).send({
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   getAllPosts,
   createPost,
   getPostById,
   deletePost,
+  updatePost
 };
